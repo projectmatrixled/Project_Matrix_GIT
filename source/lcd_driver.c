@@ -1,4 +1,4 @@
-#include "config\LCD_config.h"
+#include "..\config\LCD_config.h"
 
 void lcd_init()
 {

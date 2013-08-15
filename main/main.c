@@ -1,5 +1,5 @@
-#include "include\Header.h"
-#include "config\APP_config.h"
+#include "..\include\Header.h"
+#include "..\config\APP_config.h"
 
 enum conditions
 {

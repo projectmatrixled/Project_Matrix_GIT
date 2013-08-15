@@ -12,11 +12,11 @@
 /* include driver files */
 
 #if (LCD_DRIVER_ENABLED == TRUE)
-#include "source\lcd_driver.c"
+#include "..\source\lcd_driver.c"
 #endif
 
 #if (RELAY_DRIVER_ENABLED == TRUE)
-#include "relay_driver.c"
+#include "..\source\relay_driver.c"
 #endif
 
 #endif

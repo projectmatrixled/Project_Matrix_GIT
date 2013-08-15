@@ -1,0 +1,415 @@
+CCS PCM C Compiler, Version 4.010, 35549               15-Aug-13 05:19
+
+               Filename: D:\GIT_Lambda\Project_Matrix_GIT\main\main.lst
+
+               ROM used: 261 words (3%)
+                         Largest free fragment is 2048
+               RAM used: 57 (15%) at main() level
+                         59 (16%) worst case
+               Stack:    3 locations
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   088
+0003:  NOP
+.................... #include "..\include\Header.h" 
+....................  
+.................... #ifndef __header_h 
+.................... #define __header_h 
+....................  
+.................... #define FALSE		0 
+.................... #define TRUE		!FALSE 
+....................  
+.................... 	#if defined(__PCM__)// Mid Range Micro Family 
+....................       #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+....................       #fuses HS,NOWDT,NOPROTECT,NOLVP 
+....................       #use DELAY(CLOCK=16000000) 
+*
+0018:  MOVLW  54
+0019:  MOVWF  04
+001A:  BCF    03.7
+001B:  MOVF   00,W
+001C:  BTFSC  03.2
+001D:  GOTO   02C
+001E:  MOVLW  05
+001F:  MOVWF  78
+0020:  CLRF   77
+0021:  DECFSZ 77,F
+0022:  GOTO   021
+0023:  DECFSZ 78,F
+0024:  GOTO   020
+0025:  MOVLW  2E
+0026:  MOVWF  77
+0027:  DECFSZ 77,F
+0028:  GOTO   027
+0029:  GOTO   02A
+002A:  DECFSZ 00,F
+002B:  GOTO   01E
+002C:  RETLW  00
+....................       #use rs232(baud=9600,xmit=PIN_C6,rcv=PIN_C7) 
+....................    #endif 
+....................  
+.................... #endif 
+....................  
+.................... #include "..\config\APP_config.h" 
+....................  
+.................... #ifndef __APP_config 
+....................  
+.................... #define __APP_config 
+....................  
+....................  
+.................... /* configure application specific driver */ 
+.................... #define LCD_DRIVER_ENABLED TRUE 
+.................... #define RELAY_DRIVER_ENABLED FALSE 
+....................  
+....................  
+.................... /* include driver files */ 
+....................  
+.................... #if (LCD_DRIVER_ENABLED == TRUE) 
+.................... #include "..\source\lcd_driver.c" 
+.................... #include "..\config\LCD_config.h" 
+.................... #ifndef __lcd_config_h 
+....................  
+.................... #define __lcd_config_h 
+....................  
+.................... #define LCD_RS pin_E0 
+.................... #define LCD_RW pin_E1 
+.................... #define LCD_EN pin_E2 
+....................  
+.................... // LCD -> R/S  R/W  EN  D0   D1  D2  D3  D4  D5  D6  D7 
+.................... // PIN -> RE0  RE1  RE2 Rb0  Rb1 Rb2 Rb3 Rb4 Rb5 Rb6 Rb7 
+....................  
+.................... void lcd_write(char data); 
+.................... void lcd_init(); 
+.................... void lcd_newline(); 
+.................... void clr_lcd(); 
+.................... char Disp[45]; 
+....................  
+.................... #endif 
+....................  
+....................  
+.................... void lcd_init() 
+.................... { 
+....................   output_bit(LCD_RS,0);//rs Command 
+*
+0044:  BCF    09.0
+0045:  BSF    03.5
+0046:  BCF    09.0
+....................   delay_ms(10); 
+0047:  MOVLW  0A
+0048:  BCF    03.5
+0049:  MOVWF  54
+004A:  CALL   018
+....................   lcd_write(0x01); 
+004B:  MOVLW  01
+004C:  MOVWF  53
+004D:  CALL   02D
+....................   delay_ms(10); 
+004E:  MOVLW  0A
+004F:  MOVWF  54
+0050:  CALL   018
+....................   lcd_write(0x38);//16*2 
+0051:  MOVLW  38
+0052:  MOVWF  53
+0053:  CALL   02D
+....................   lcd_write(0x06); 
+0054:  MOVLW  06
+0055:  MOVWF  53
+0056:  CALL   02D
+....................   lcd_write(0x0f); 
+0057:  MOVLW  0F
+0058:  MOVWF  53
+0059:  CALL   02D
+....................   lcd_write(0x80);//cursor first position 
+005A:  MOVLW  80
+005B:  MOVWF  53
+005C:  CALL   02D
+....................   delay_ms(100); 
+005D:  MOVLW  64
+005E:  MOVWF  54
+005F:  CALL   018
+....................   output_bit(LCD_RS,1);// rs  Data 
+0060:  BSF    09.0
+0061:  BSF    03.5
+0062:  BCF    09.0
+.................... } 
+0063:  BCF    03.5
+0064:  BCF    0A.3
+0065:  BCF    0A.4
+0066:  GOTO   0AD (RETURN)
+....................  
+.................... void clr_lcd() 
+.................... { 
+.................... output_bit(LCD_RS,0); 
+0067:  BCF    09.0
+0068:  BSF    03.5
+0069:  BCF    09.0
+.................... delay_ms(10); 
+006A:  MOVLW  0A
+006B:  BCF    03.5
+006C:  MOVWF  54
+006D:  CALL   018
+.................... lcd_write(0x01); 
+006E:  MOVLW  01
+006F:  MOVWF  53
+0070:  CALL   02D
+.................... output_bit(LCD_RS,1); 
+0071:  BSF    09.0
+0072:  BSF    03.5
+0073:  BCF    09.0
+.................... delay_ms(1); 
+0074:  MOVLW  01
+0075:  BCF    03.5
+0076:  MOVWF  54
+0077:  CALL   018
+.................... }//end of clr lcd 
+0078:  RETLW  00
+....................  
+.................... void lcd_newline() 
+.................... { 
+.................... output_bit(LCD_RS,0); 
+.................... delay_ms(10); 
+.................... lcd_write(0xc0); 
+.................... output_bit(LCD_RS,1); 
+.................... delay_ms(1); 
+.................... }//end of lcd newline 
+....................  
+.................... void lcd_write(char data) 
+.................... { 
+.................... output_b(data); 
+*
+002D:  BSF    03.5
+002E:  CLRF   06
+002F:  BCF    03.5
+0030:  MOVF   53,W
+0031:  MOVWF  06
+.................... delay_ms(1); 
+0032:  MOVLW  01
+0033:  MOVWF  54
+0034:  CALL   018
+.................... output_bit(LCD_EN,1); 
+0035:  BSF    09.2
+0036:  BSF    03.5
+0037:  BCF    09.2
+.................... delay_ms(3); 
+0038:  MOVLW  03
+0039:  BCF    03.5
+003A:  MOVWF  54
+003B:  CALL   018
+.................... output_bit(LCD_EN,0); 
+003C:  BCF    09.2
+003D:  BSF    03.5
+003E:  BCF    09.2
+.................... delay_ms(1); 
+003F:  MOVLW  01
+0040:  BCF    03.5
+0041:  MOVWF  54
+0042:  CALL   018
+.................... }//end of lcd write 
+0043:  RETLW  00
+....................  
+....................  
+....................  
+....................  
+.................... #endif 
+....................  
+.................... #if (RELAY_DRIVER_ENABLED == TRUE) 
+.................... #include "..\source\relay_driver.c" 
+.................... #endif 
+....................  
+.................... #endif 
+....................  
+....................  
+....................  
+.................... enum conditions 
+.................... { 
+.................... START,STOP,RUN 
+.................... }; 
+....................  
+.................... enum conditions state=START; 
+*
+009B:  BCF    03.5
+009C:  CLRF   4D
+....................  
+.................... void main() 
+.................... { 
+*
+0088:  CLRF   04
+0089:  BCF    03.7
+008A:  MOVLW  1F
+008B:  ANDWF  03,F
+008C:  MOVLW  19
+008D:  BSF    03.5
+008E:  MOVWF  19
+008F:  MOVLW  A2
+0090:  MOVWF  18
+0091:  MOVLW  90
+0092:  BCF    03.5
+0093:  MOVWF  18
+0094:  BSF    03.5
+0095:  BSF    1F.0
+0096:  BSF    1F.1
+0097:  BSF    1F.2
+0098:  BCF    1F.3
+0099:  MOVLW  07
+009A:  MOVWF  1C
+.................... int i,ON=1; 
+*
+009F:  MOVLW  01
+00A0:  MOVWF  51
+.................... delay_ms(1000); 
+00A1:  MOVLW  04
+00A2:  MOVWF  52
+00A3:  MOVLW  FA
+00A4:  MOVWF  54
+00A5:  CALL   018
+00A6:  DECFSZ 52,F
+00A7:  GOTO   0A3
+.................... output_bit(LCD_RW,0);//Write 
+00A8:  BCF    09.1
+00A9:  BSF    03.5
+00AA:  BCF    09.1
+.................... lcd_init(); 
+00AB:  BCF    03.5
+00AC:  GOTO   044
+.................... delay_ms(1000); 
+00AD:  MOVLW  04
+00AE:  MOVWF  52
+00AF:  MOVLW  FA
+00B0:  MOVWF  54
+00B1:  CALL   018
+00B2:  DECFSZ 52,F
+00B3:  GOTO   0AF
+....................  
+.................... while(1) 
+....................     { 
+....................      switch(state) 
+....................      { 
+00B4:  MOVF   4D,W
+00B5:  BTFSC  03.2
+00B6:  GOTO   0BE
+00B7:  XORLW  02
+00B8:  BTFSC  03.2
+00B9:  GOTO   0C1
+00BA:  XORLW  03
+00BB:  BTFSC  03.2
+00BC:  GOTO   101
+00BD:  GOTO   103
+....................       case START : 
+....................  
+....................           state=RUN; 
+00BE:  MOVLW  02
+00BF:  MOVWF  4D
+....................           break; 
+00C0:  GOTO   103
+....................  
+....................       case RUN : 
+....................  
+....................           if(ON==1) 
+00C1:  DECFSZ 51,W
+00C2:  GOTO   0FE
+....................            { 
+....................              clr_lcd(); 
+00C3:  CALL   067
+....................              sprintf(DISP," <<STARTED..>> "); 
+*
+009D:  CLRF   4E
+009E:  CLRF   4F
+*
+00C4:  CLRF   4F
+00C5:  MOVLW  20
+00C6:  MOVWF  4E
+00C7:  CLRF   52
+00C8:  MOVF   52,W
+00C9:  CALL   004
+00CA:  INCF   52,F
+00CB:  MOVWF  77
+00CC:  MOVWF  53
+00CD:  GOTO   079
+00CE:  MOVLW  0F
+00CF:  SUBWF  52,W
+00D0:  BTFSS  03.2
+00D1:  GOTO   0C8
+....................              for(i=0;Disp[i]!='\0';i++) 
+00D2:  CLRF   50
+00D3:  MOVLW  20
+00D4:  ADDWF  50,W
+00D5:  MOVWF  04
+00D6:  BCF    03.7
+00D7:  MOVF   00,F
+00D8:  BTFSC  03.2
+00D9:  GOTO   0F1
+....................               { 
+....................                putc(disp[i]); 
+00DA:  MOVLW  20
+00DB:  ADDWF  50,W
+00DC:  MOVWF  04
+00DD:  BCF    03.7
+00DE:  MOVF   00,W
+00DF:  MOVWF  52
+00E0:  MOVF   52,W
+00E1:  BTFSS  0C.4
+00E2:  GOTO   0E1
+00E3:  MOVWF  19
+....................                lcd_write(Disp[i]); 
+00E4:  MOVLW  20
+00E5:  ADDWF  50,W
+00E6:  MOVWF  04
+00E7:  BCF    03.7
+00E8:  MOVF   00,W
+00E9:  MOVWF  52
+00EA:  MOVWF  53
+00EB:  CALL   02D
+....................                delay_ms(100); 
+00EC:  MOVLW  64
+00ED:  MOVWF  54
+00EE:  CALL   018
+....................               } 
+00EF:  INCF   50,F
+00F0:  GOTO   0D3
+....................               printf("\n"); 
+00F1:  MOVLW  0A
+00F2:  BTFSS  0C.4
+00F3:  GOTO   0F2
+00F4:  MOVWF  19
+....................               delay_ms(1000); 
+00F5:  MOVLW  04
+00F6:  MOVWF  52
+00F7:  MOVLW  FA
+00F8:  MOVWF  54
+00F9:  CALL   018
+00FA:  DECFSZ 52,F
+00FB:  GOTO   0F7
+....................               break; 
+00FC:  GOTO   103
+....................            } 
+....................           else 
+00FD:  GOTO   100
+....................              state=STOP; 
+00FE:  MOVLW  01
+00FF:  MOVWF  4D
+....................              break; 
+0100:  GOTO   103
+....................  
+....................        case STOP : 
+....................  
+....................             clr_lcd(); 
+0101:  CALL   067
+....................             break; 
+0102:  GOTO   103
+....................  
+....................      } 
+....................     }//while(1); 
+0103:  GOTO   0B4
+....................   } 
+....................  
+....................  
+0104:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F72   HS NOWDT PUT NODEBUG NOPROTECT BROWNOUT NOLVP NOCPD NOWRT

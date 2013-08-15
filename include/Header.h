@@ -2,7 +2,10 @@
 #ifndef __header_h
 #define __header_h
 
-   #if defined(__PCM__)// Mid Range Micro Family
+#define FALSE		0
+#define TRUE		!FALSE
+
+	#if defined(__PCM__)// Mid Range Micro Family
       #include <16F877A.h>
       #fuses HS,NOWDT,NOPROTECT,NOLVP
       #use DELAY(CLOCK=16000000)
