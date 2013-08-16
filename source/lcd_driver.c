@@ -1,4 +1,6 @@
 #include "..\config\LCD_config.h"
+#if (LCD_DRIVER_ENABLED == TRUE)
+/* driver for PIC microcontroller */
 
 void lcd_init()
 {
@@ -42,5 +44,5 @@ output_bit(LCD_EN,0);
 delay_ms(1);
 }//end of lcd write
 
-
+#endif
 

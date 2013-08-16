@@ -1,0 +1,3 @@
+".\led_matrix_main.obj" 
+TO "led_matrix_89s52" 
+RAMSIZE(256) 

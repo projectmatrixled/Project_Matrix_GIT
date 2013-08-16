@@ -1,0 +1,51 @@
+C51 COMPILER V7.00  LED_MATRIX_MAIN                                                        08/16/2013 17:55:33 PAGE 1   
+
+
+C51 COMPILER V7.00, COMPILATION OF MODULE LED_MATRIX_MAIN
+OBJECT MODULE PLACED IN .\led_matrix_main.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\main\led_matrix_main.c BROWSE DEBUG OBJECTEXTEND PRINT(.\led_matrix_main
+                    -.lst) OBJECT(.\led_matrix_main.obj)
+
+stmt level    source
+
+   1          // 5x7 matrix LED display as 5 Columns and 7 Rows
+   2          // Display the Moving 'L''A''M''B''D''A'. 
+   3          //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   4          // Edited on : 16/08/2013
+   5          // Developed by : Sivalingam / Kumaraguru
+   6          // Reviwed by : 
+   7          //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^     
+   8          
+   9          #include "..\include\header.h"
+  10          #include "..\config\app_config.h"
+*** WARNING C235 IN LINE 26 OF ..\SOURCE\LED_DRIVER.C: parameter 1: different types
+  11          
+  12          void main ()
+  13          
+  14          {
+  15   1      int column_number;
+  16   1      while(1)
+  17   1      {
+  18   2              for(column_number=1;column_number<=32;column_number++ )
+  19   2              {
+  20   3                      write_column(column_number);
+  21   3                      write_row(0xFF);
+  22   3                      delay_us(50);
+  23   3              }
+  24   2      }
+  25   1      }
+  26          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     95    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

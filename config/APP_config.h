@@ -5,8 +5,9 @@
 
 
 /* configure application specific driver */
-#define LCD_DRIVER_ENABLED TRUE
+#define LCD_DRIVER_ENABLED FALSE
 #define RELAY_DRIVER_ENABLED FALSE
+#define LED_DISPLAY_ENABLED TRUE
 
 
 /* include driver files */
@@ -19,5 +20,10 @@
 #include "..\source\relay_driver.c"
 #endif
 
+#if (LED_DISPLAY_ENABLED == TRUE )
+
+#include "..\source\led_driver.c"
+
 #endif
 
+endif

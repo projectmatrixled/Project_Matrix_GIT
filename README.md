@@ -1,5 +1,11 @@
 Project_Matrix_GIT
 ==================
-Micrcontroller : PIC16F877A
-LCD program : 8-bit LCD
-This version has successful build thourgh CCS compiler, using MPLAB.
+Micrcontroller : 89S52
+LED display program : 8-bit LCD
+This version has successful build through Keil compiler.
+
+This is first test program for implementing the LED program
+
+
+
+
