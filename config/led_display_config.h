@@ -7,24 +7,31 @@
 #define DISABLE_MUX TRUE
 
 #define NO_OF_ROW 16
-#define NO_OF_COL 32
+#define NO_OF_COL 16
 
-/* MUX1 controls 1 to 16 column */
-sbit MUX1_EN = P0^0;
-#define MUX1_DATA P3
-
-
-/* MUX2 controls 17 to 32 column */
-sbit MUX2_EN = P0^1;
-#define MUX2_DATA P3
-
-/* ROW 1-16 */
-#define ROW_SET1 P2   	/*Row 1 - Row 8*/
-#define ROW_SET2 P1		/*Row 9 - Row 16*/
+/* Design of LED panel */
+/*		 |------> clk------------------>4017 ------> ULN 2803 ---->Row x Column 			*/
+/*	 	 |------> 4017_rest--------------|								   |				*/
+/*		 |------> serial_data ---------------------------------------->Shift register		*/
+/*	8052 -------> storg_clk	------------------------------------------>   74HC595			*/
+/*       |------> shift_clk ------------------------------------------>          			*/
 
 
+/* configuration for 1 to 8 column */
+sbit SHIFT_REG_SERIAL_DATA = P1^4;
+sbit SHIFT_REG_SHIFTING_CLOCK = P1^1;
+sbit SHIFT_REG_STORAGE_CLOCK = P1^2;
 
-void write_column(int column_number);
-void write_row(int row_number);
+
+/* configuration for 9 to 16 column */
+
+
+/* ROW cnfiguration for row 1-16 */
+sbit COUNTER_CLK = P1^0;		/*	4017 clk pulse */
+sbit COUNTER1_RST = P2^0;		/* 	4017 rst pin for Row 1 - 8*/
+sbit COUNTER2_RST = P2^1;		/*  4017 rst pin for Row 9 - 16*/
+
+void write_column(unsigned int column_number);
+void write_row(unsigned int row_number);
 
 #endif

@@ -1,0 +1,3 @@
+".\led_matrix_main.obj" 
+TO "89S52_uv2_proj" 
+RAMSIZE(256) 

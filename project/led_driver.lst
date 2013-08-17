@@ -1,0 +1,54 @@
+C51 COMPILER V7.00  LED_DRIVER                                                             08/17/2013 11:59:31 PAGE 1   
+
+
+C51 COMPILER V7.00, COMPILATION OF MODULE LED_DRIVER
+OBJECT MODULE PLACED IN .\led_driver.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\source\led_driver.c BROWSE DEBUG OBJECTEXTEND PRINT(.\led_driver.lst) OB
+                    -JECT(.\led_driver.obj)
+
+stmt level    source
+
+   1          
+   2          # include "..\config\led_display_config.h"
+*** ERROR C202 IN LINE 13 OF ..\CONFIG\LED_DISPLAY_CONFIG.H: 'P0': undefined identifier
+*** ERROR C202 IN LINE 18 OF ..\CONFIG\LED_DISPLAY_CONFIG.H: 'P0': undefined identifier
+   3          
+   4          #if (LED_DISPLAY_ENABLED == TRUE )
+*** WARNING C322 IN LINE 4 OF ..\source\led_driver.c: unknown identifier
+*** WARNING C322 IN LINE 4 OF ..\source\led_driver.c: unknown identifier
+   5          void write_column(int column_number)
+   6          {
+   7   1       if(column_number)
+   8   1        { 
+   9   2                if (column_number >16)
+  10   2                  {
+  11   3                              MUX1_EN = DISABLE_MUX;
+*** ERROR C202 IN LINE 11 OF ..\SOURCE\LED_DRIVER.C: 'MUX1_EN': undefined identifier
+  12   3                              MUX2_EN = ENABLE_MUX;                   
+*** ERROR C202 IN LINE 12 OF ..\SOURCE\LED_DRIVER.C: 'MUX2_EN': undefined identifier
+  13   3                              MUX2_DATA = column_number-1;
+*** ERROR C202 IN LINE 13 OF ..\SOURCE\LED_DRIVER.C: 'P3': undefined identifier
+  14   3                      }
+  15   2                else
+  16   2                  {
+  17   3                              MUX2_EN = DISABLE_MUX;
+*** ERROR C202 IN LINE 17 OF ..\SOURCE\LED_DRIVER.C: 'MUX2_EN': undefined identifier
+  18   3                              MUX1_EN = ENABLE_MUX;                   
+*** ERROR C202 IN LINE 18 OF ..\SOURCE\LED_DRIVER.C: 'MUX1_EN': undefined identifier
+  19   3                              MUX1_DATA = column_number-1;
+*** ERROR C202 IN LINE 19 OF ..\SOURCE\LED_DRIVER.C: 'P3': undefined identifier
+  20   3                      }
+  21   2        }
+  22   1      
+  23   1      }
+  24           
+  25          void write_row(unsigned int row_data)
+  26          {
+  27   1      ROW_SET1 = row_data;   
+  28   1      ROW_SET2 = row_data;   
+  29   1      }
+  30          
+  31          
+  32          #endif
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  8 ERROR(S)
