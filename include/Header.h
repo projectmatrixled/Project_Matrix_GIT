@@ -1,6 +1,6 @@
 
 /* General macros */
-#define FOSC 11.0592   	  /* Oscillator frequency in Hz*/
+#define FOSC 11.0592   	  /* Oscillator frequency in MHz*/
 #define FALSE 0
 #define TRUE !FALSE
 #define HIGH TRUE
@@ -11,4 +11,4 @@
 //#include <reg52.h>
 #include <AT89X52.h>
 #include "../source/delay.c"
-#include "../source/timer.c"
+//#include "../source/timer.c"

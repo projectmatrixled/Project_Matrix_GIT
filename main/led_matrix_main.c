@@ -13,11 +13,11 @@
 /* Different states provided for the microcontroller */
 typedef enum
 {
-INITIALISE,
-TEST_LED,
-DISPLAY_TEXT,
-GET_INPUT,
-END_APPLICATION
+  INITIALISE,
+  TEST_LED,
+  DISPLAY_TEXT,
+  GET_INPUT,
+  END_APPLICATION
 }st;
 
 
@@ -25,43 +25,42 @@ st STATUS = INITIALISE;
 
 void main ()
 {
-unsigned int row_number;
+//unsigned int row_number;
 while(1)
-{
-	
-	switch(STATUS)
+  {	
+  switch(STATUS)
 	{
-		case INITIALISE:
+	    case INITIALISE:
 					/* This calls all the required intialisation for the application*/
 		                   STATUS = TEST_LED;
 						   break;
 		case TEST_LED:
-					 /* This is a test program which turns on all the LEDS in the display*/
-				//for(row_number=1;row_number<=3;row_number++ )
+					 /* This is a test program which turns on all the LEDS in the display  */
+			//for(row_number=1;row_number<=4;row_number++ )
 				{
-					write_row(0);
+					write_row(8);
 					//write_column(0xFF);
-					delay_us(5000000);
+					//delay_us(5000);
 				}	
 						STATUS = TEST_LED;
 						break;
 
 	   	case DISPLAY_TEXT:
-						/* The data from memeory is displayed in the memory */ 
+						/* The data from memeory is displayed in the memory*/  
 	   					break;
 
 		case GET_INPUT :
 						/* get the input from keypad and print temperarily on LCD*/
-						/* when the entered data is set, store it in the memory*/
+						/* when the entered data is set, store it in the memory	   */
 						break;
 		
 		case END_APPLICATION:
-						/* run this when power is turned off */
+						/* run this when power is turned off  */
 						break;
 
 	 	default :
 						break;
 	 }
 	}
-}
+}	   
 

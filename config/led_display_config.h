@@ -9,6 +9,7 @@
 #define NO_OF_ROW 16
 #define NO_OF_COL 16
 
+
 /* Design of LED panel */
 /*		 |------> clk------------------>4017 ------> ULN 2803 ---->Row x Column 			*/
 /*	 	 |------> 4017_rest--------------|								   |				*/
