@@ -19,9 +19,9 @@
 
 
 /* configuration for 1 to 8 column */
-sbit SHIFT_REG_SERIAL_DATA = P1^4;
-sbit SHIFT_REG_SHIFTING_CLOCK = P1^1;
-sbit SHIFT_REG_STORAGE_CLOCK = P1^2;
+sbit SHIFT_REG_STORAGE_CLOCK = P3^0;
+sbit SHIFT_REG_SHIFTING_CLOCK = P3^1;
+sbit SHIFT_REG_SERIAL_DATA = P3^2;
 
 
 /* configuration for 9 to 16 column */
@@ -29,8 +29,8 @@ sbit SHIFT_REG_STORAGE_CLOCK = P1^2;
 
 /* ROW cnfiguration for row 1-16 */
 sbit COUNTER_CLK = P1^0;		/*	4017 clk pulse */
-sbit COUNTER1_RST = P2^0;		/* 	4017 rst pin for Row 1 - 8*/
-sbit COUNTER2_RST = P2^1;		/*  4017 rst pin for Row 9 - 16*/
+sbit COUNTER1_RST = P1^1;		/* 	4017 rst pin for Row 1 - 8*/
+sbit COUNTER2_RST = P1^2;		/* 	4017 rst pin for Row 1 - 8*/
 
 void write_column(unsigned int column_number);
 void write_row(unsigned int row_number);

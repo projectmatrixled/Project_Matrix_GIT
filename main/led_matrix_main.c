@@ -36,11 +36,8 @@ while(1)
 						   break;
 		case TEST_LED:
 					 /* This is a test program which turns on all the LEDS in the display  */
-			//for(row_number=1;row_number<=4;row_number++ )
 				{
 					write_row(8);
-					//write_column(0xFF);
-					//delay_us(5000);
 				}	
 						STATUS = TEST_LED;
 						break;

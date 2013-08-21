@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 #include "..\config\LCD_config.h"
 #if (LCD_DRIVER_ENABLED == TRUE)
 /* driver for PIC microcontroller */
+=======
+#include "config\LCD_config.h"
+>>>>>>> parent of 173886a... PIC16F877A LCD program
 
 void lcd_init()
 {
