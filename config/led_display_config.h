@@ -31,8 +31,10 @@ sbit SHIFT_REG_SERIAL_DATA = P3^2;
 sbit COUNTER_CLK = P1^0;		/*	4017 clk pulse */
 sbit COUNTER1_RST = P1^1;		/* 	4017 rst pin for Row 1 - 8*/
 sbit COUNTER2_RST = P1^2;		/* 	4017 rst pin for Row 1 - 8*/
+sbit COUNTER1_CLK_ENABLE = P2^0;		/*	4017 clk pulse */
+sbit COUNTER2_CLK_ENABLE = P2^1;		/*	4017 clk pulse */
 
-void write_column(unsigned int column_number);
-void write_row(unsigned int row_number);
+ void row_number(int row);
+ void column_number(int value);
 
 #endif

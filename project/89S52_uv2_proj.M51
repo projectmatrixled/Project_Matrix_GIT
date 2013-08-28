@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V5.00                                                        08/21/2013  19:57:04  PAGE 1
+BL51 BANKED LINKER/LOCATER V5.00                                                        08/28/2013  11:04:21  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V5.00, INVOKED BY:
@@ -12,7 +12,6 @@ INPUT MODULES INCLUDED:
   .\led_matrix_main.obj (LED_MATRIX_MAIN)
   C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
   C:\KEIL\C51\LIB\C51S.LIB (?C?ULCMP)
-  C:\KEIL\C51\LIB\C51S.LIB (?C?LLDCODE)
   C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
 
 
@@ -24,57 +23,53 @@ LINK MAP OF MODULE:  89S52_uv2_proj (LED_MATRIX_MAIN)
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            DATA    0008H     0010H     UNIT         _DATA_GROUP_
-            DATA    0018H     0001H     UNIT         ?DT?LED_MATRIX_MAIN
-            IDATA   0019H     0001H     UNIT         ?STACK
+            DATA    0008H     0008H     UNIT         _DATA_GROUP_
+            DATA    0010H     0001H     UNIT         ?DT?LED_MATRIX_MAIN
+            IDATA   0011H     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
-            CODE    0003H     00A0H     UNIT         ?PR?_WRITE_ROW?LED_MATRIX_MAIN
-            CODE    00A3H     008CH     UNIT         ?C_C51STARTUP
-            CODE    012FH     0045H     UNIT         ?PR?_DELAY_US?LED_MATRIX_MAIN
-            CODE    0174H     0036H     UNIT         ?PR?_WRITE_COLUMN?LED_MATRIX_MAIN
-            CODE    01AAH     0021H     UNIT         ?C?LIB_CODE
-            CODE    01CBH     0020H     UNIT         ?CO?LED_MATRIX_MAIN
-            CODE    01EBH     0019H     UNIT         ?PR?MAIN?LED_MATRIX_MAIN
-            CODE    0204H     0004H     UNIT         ?C_INITSEG
+            CODE    0003H     008CH     UNIT         ?C_C51STARTUP
+            CODE    008FH     0054H     UNIT         ?PR?_ROW_NUMBER?LED_MATRIX_MAIN
+            CODE    00E3H     0044H     UNIT         ?PR?_COLUMN_NUMBER?LED_MATRIX_MAIN
+            CODE    0127H     0043H     UNIT         ?PR?_DELAY_US?LED_MATRIX_MAIN
+            CODE    016AH     0031H     UNIT         ?PR?MAIN?LED_MATRIX_MAIN
+            CODE    019BH     0011H     UNIT         ?C?LIB_CODE
+            CODE    01ACH     0004H     UNIT         ?C_INITSEG
 
 
 
 OVERLAY MAP OF MODULE:   89S52_uv2_proj (LED_MATRIX_MAIN)
 
 
-SEGMENT                                     DATA_GROUP 
-  +--> CALLED SEGMENT                     START    LENGTH
----------------------------------------------------------
-?C_C51STARTUP                             -----    -----
+SEGMENT                                      DATA_GROUP 
+  +--> CALLED SEGMENT                      START    LENGTH
+----------------------------------------------------------
+?C_C51STARTUP                              -----    -----
   +--> ?PR?MAIN?LED_MATRIX_MAIN
   +--> ?C_INITSEG
 
-?PR?MAIN?LED_MATRIX_MAIN                  -----    -----
-  +--> ?PR?_WRITE_ROW?LED_MATRIX_MAIN
-
-?PR?_WRITE_ROW?LED_MATRIX_MAIN            0008H    0008H
-  +--> ?CO?LED_MATRIX_MAIN
-  +--> ?PR?_WRITE_COLUMN?LED_MATRIX_MAIN
+?PR?MAIN?LED_MATRIX_MAIN                   -----    -----
   +--> ?PR?_DELAY_US?LED_MATRIX_MAIN
+  +--> ?PR?_ROW_NUMBER?LED_MATRIX_MAIN
+  +--> ?PR?_COLUMN_NUMBER?LED_MATRIX_MAIN
 
-BL51 BANKED LINKER/LOCATER V5.00                                                      08/21/2013  19:57:04  PAGE 2
-
-
-?PR?_DELAY_US?LED_MATRIX_MAIN             0010H    0008H
+?PR?_DELAY_US?LED_MATRIX_MAIN              0008H    0008H
 
 
 
 SYMBOL TABLE OF MODULE:  89S52_uv2_proj (LED_MATRIX_MAIN)
+BL51 BANKED LINKER/LOCATER V5.00                                                      08/28/2013  11:04:21  PAGE 2
+
+
 
   VALUE           TYPE          NAME
   ----------------------------------
 
   -------         MODULE        LED_MATRIX_MAIN
   C:0000H         SYMBOL        _ICE_DUMMY_
-  C:0174H         PUBLIC        _write_column
   D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
   B:00D0H.6       PUBLIC        AC
   B:00B0H.4       PUBLIC        T0
@@ -117,30 +112,32 @@ SYMBOL TABLE OF MODULE:  89S52_uv2_proj (LED_MATRIX_MAIN)
   B:0090H.7       PUBLIC        P1_7
   B:00B0H.6       PUBLIC        P3_6
   B:00A0H.7       PUBLIC        P2_7
+  B:00A0H.0       PUBLIC        COUNTER1_CLK_ENABLE
   B:00B0H.7       PUBLIC        P3_7
+  B:00A0H.1       PUBLIC        COUNTER2_CLK_ENABLE
   B:0098H.0       PUBLIC        RI
-BL51 BANKED LINKER/LOCATER V5.00                                                      08/21/2013  19:57:04  PAGE 3
-
-
   B:00D0H.7       PUBLIC        CY
   B:00B0H.2       PUBLIC        INT0
   B:00B0H.3       PUBLIC        INT1
+BL51 BANKED LINKER/LOCATER V5.00                                                      08/28/2013  11:04:21  PAGE 3
+
+
   B:0098H.1       PUBLIC        TI
   B:00B8H.4       PUBLIC        PS
   B:0090H.1       PUBLIC        T2EX
   B:00D0H.2       PUBLIC        OV
-  C:01EBH         PUBLIC        main
+  C:016AH         PUBLIC        main
+  C:008FH         PUBLIC        _row_number
   B:00C8H.1       PUBLIC        C_T2
   B:00B0H.6       PUBLIC        WR
   B:00C8H.5       PUBLIC        RCLK
   B:0090H.1       PUBLIC        COUNTER1_RST
   B:00C8H.4       PUBLIC        TCLK
   B:0090H.2       PUBLIC        COUNTER2_RST
-  C:0135H         PUBLIC        _delay_us
+  C:012BH         PUBLIC        _delay_us
   B:0088H.1       PUBLIC        IE0
   B:0088H.3       PUBLIC        IE1
   B:00C8H.0       PUBLIC        CP_RL2
-  C:0003H         PUBLIC        _write_row
   B:00A8H.1       PUBLIC        ET0
   B:00A8H.3       PUBLIC        ET1
   B:0088H.5       PUBLIC        TF0
@@ -170,113 +167,116 @@ SYMBOL TABLE OF MODULE:  89S52_uv2_proj (LED_MATRIX_MAIN)
   B:00B8H.2       PUBLIC        PX1
   B:0090H.0       PUBLIC        COUNTER_CLK
   B:00B0H.2       PUBLIC        SHIFT_REG_SERIAL_DATA
+  C:00E3H         PUBLIC        _column_number
   B:00C8H.3       PUBLIC        EXEN2
   B:0098H.4       PUBLIC        REN
-  D:0018H         PUBLIC        STATUS
+  D:0010H         PUBLIC        STATUS
   B:00B0H.0       PUBLIC        RXD
   B:00B0H.1       PUBLIC        TXD
-  C:01CBH         PUBLIC        Digit
   B:00D0H.5       PUBLIC        F0
-  -------         PROC          L?0037
-  -------         ENDPROC       L?0037
-BL51 BANKED LINKER/LOCATER V5.00                                                      08/21/2013  19:57:04  PAGE 4
-
-
+  C:0127H         SYMBOL        L?0035
+  -------         PROC          L?0034
+  -------         ENDPROC       L?0034
+  C:0127H         SYMBOL        L?0035
   -------         PROC          _DELAY_US
-  D:0010H         SYMBOL        us
+BL51 BANKED LINKER/LOCATER V5.00                                                      08/28/2013  11:04:21  PAGE 4
+
+
+  D:0008H         SYMBOL        us
   -------         DO            
-  D:0014H         SYMBOL        i
+  D:000CH         SYMBOL        i
   -------         ENDDO         
-  C:0135H         LINE#         4
-  C:013DH         LINE#         5
-  C:013DH         LINE#         7
-  C:0173H         LINE#         8
+  C:012BH         LINE#         4
+  C:0133H         LINE#         5
+  C:0133H         LINE#         7
+  C:0169H         LINE#         8
   -------         ENDPROC       _DELAY_US
-  -------         PROC          _WRITE_ROW
-  D:0008H         SYMBOL        row_number
+  -------         PROC          _ROW_NUMBER
+  D:0006H         SYMBOL        row
   -------         DO            
-  D:000AH         SYMBOL        i
-  D:000CH         SYMBOL        k
-  D:000EH         SYMBOL        j
+  D:0004H         SYMBOL        i
   -------         ENDDO         
-  C:0003H         LINE#         11
-  C:0007H         LINE#         12
-  C:0007H         LINE#         15
-  C:000CH         LINE#         16
-  C:000CH         LINE#         17
-  C:0011H         LINE#         18
-  C:0011H         LINE#         19
-  C:0013H         LINE#         20
-  C:0015H         LINE#         21
-  C:0017H         LINE#         22
-  C:0019H         LINE#         24
-  C:002AH         LINE#         25
-  C:002AH         LINE#         26
-  C:0057H         LINE#         27
-  C:005DH         LINE#         28
-  C:005FH         LINE#         29
-  C:0061H         LINE#         30
-  C:0066H         LINE#         31
-  C:0070H         LINE#         32
-  C:0072H         LINE#         33
-  C:0074H         LINE#         34
-  C:0079H         LINE#         35
-  C:008CH         LINE#         37
-  C:00A2H         LINE#         38
-  -------         ENDPROC       _WRITE_ROW
-  -------         PROC          _WRITE_COLUMN
-  D:0004H         SYMBOL        column_number
+  C:008FH         LINE#         11
+  C:008FH         LINE#         12
+  C:008FH         LINE#         14
+  C:009AH         LINE#         15
+  C:009AH         LINE#         16
+  C:009CH         LINE#         17
+  C:009EH         LINE#         18
+  C:00A0H         LINE#         20
+  C:00B0H         LINE#         21
+  C:00B0H         LINE#         22
+  C:00B2H         LINE#         23
+  C:00B4H         LINE#         25
+  C:00BBH         LINE#         26
+  C:00BDH         LINE#         28
+  C:00BEH         LINE#         30
+  C:00BEH         LINE#         31
+  C:00C0H         LINE#         32
+  C:00C2H         LINE#         33
+  C:00C4H         LINE#         35
+  C:00D5H         LINE#         36
+  C:00D5H         LINE#         37
+  C:00D7H         LINE#         38
+  C:00D9H         LINE#         39
+  C:00E0H         LINE#         40
+  C:00E2H         LINE#         41
+  C:00E2H         LINE#         42
+  -------         ENDPROC       _ROW_NUMBER
+  -------         PROC          _COLUMN_NUMBER
+  D:0006H         SYMBOL        value
   -------         DO            
-  D:0006H         SYMBOL        Mask
-  D:0082H         SYMBOL        Flag
-  D:0002H         SYMBOL        l
+  D:0004H         SYMBOL        Mask
+  D:0006H         SYMBOL        Flag
+  D:0082H         SYMBOL        l
+  D:0002H         SYMBOL        temp
   -------         ENDDO         
-  C:0174H         LINE#         41
-  C:0178H         LINE#         42
-  C:0178H         LINE#         43
-  C:017CH         LINE#         45
-  C:017FH         LINE#         46
-  C:017FH         LINE#         47
-  C:0185H         LINE#         49
-  C:0189H         LINE#         50
-BL51 BANKED LINKER/LOCATER V5.00                                                      08/21/2013  19:57:04  PAGE 5
+  C:00E3H         LINE#         46
+  C:00E3H         LINE#         47
+  C:00E3H         LINE#         49
+  C:00E7H         LINE#         51
+  C:00FDH         LINE#         53
+  C:0100H         LINE#         54
+  C:0100H         LINE#         55
+  C:0105H         LINE#         56
+BL51 BANKED LINKER/LOCATER V5.00                                                      08/28/2013  11:04:21  PAGE 5
 
 
-  C:018DH         LINE#         52
-  C:018FH         LINE#         54
-  C:0191H         LINE#         55
-  C:0193H         LINE#         56
-  C:019AH         LINE#         57
-  C:01A5H         LINE#         58
-  C:01A7H         LINE#         59
-  C:01A9H         LINE#         60
-  -------         ENDPROC       _WRITE_COLUMN
+  C:010CH         LINE#         57
+  C:010EH         LINE#         59
+  C:0110H         LINE#         60
+  C:0112H         LINE#         61
+  C:0119H         LINE#         62
+  C:0122H         LINE#         63
+  C:0124H         LINE#         64
+  C:0126H         LINE#         65
+  -------         ENDPROC       _COLUMN_NUMBER
   -------         PROC          MAIN
-  C:01EBH         LINE#         26
-  C:01EBH         LINE#         27
-  C:01EBH         LINE#         29
-  C:01EBH         LINE#         30
-  C:01EBH         LINE#         31
-  C:01F3H         LINE#         32
-  C:01F3H         LINE#         33
-  C:01F3H         LINE#         35
-  C:01F6H         LINE#         36
-  C:01F8H         LINE#         37
-  C:01F8H         LINE#         39
-  C:01F8H         LINE#         40
-  C:01FFH         LINE#         41
-  C:01FFH         LINE#         42
-  C:0202H         LINE#         43
+  C:016AH         LINE#         26
+  C:016AH         LINE#         27
+  C:016AH         LINE#         28
+  C:0171H         LINE#         30
+  C:0178H         LINE#         31
+  C:017BH         LINE#         33
+  C:017BH         LINE#         34
+  C:017BH         LINE#         36
+  C:0183H         LINE#         37
+  C:0183H         LINE#         38
+  C:0183H         LINE#         40
+  C:0186H         LINE#         41
+  C:0188H         LINE#         42
+  C:0188H         LINE#         44
+  C:0188H         LINE#         45
+  C:018FH         LINE#         46
+  C:0196H         LINE#         47
+  C:0196H         LINE#         48
+  C:0199H         LINE#         49
   -------         ENDPROC       MAIN
   -------         ENDMOD        LED_MATRIX_MAIN
 
   -------         MODULE        ?C?ULCMP
-  C:01AAH         PUBLIC        ?C?ULCMP
+  C:019BH         PUBLIC        ?C?ULCMP
   -------         ENDMOD        ?C?ULCMP
 
-  -------         MODULE        ?C?LLDCODE
-  C:01BBH         PUBLIC        ?C?LLDCODE
-  -------         ENDMOD        ?C?LLDCODE
-
-Program Size: data=26.0 xdata=0 code=520
+Program Size: data=18.0 xdata=0 code=432
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -6,7 +6,7 @@
 
 
 
-unsigned long int code Digit[] = { 0xFFFF,0xFFFF,0xFFFF,0xFFFF,0xFFFF,0xFFFF,0xFFFF,0xFFFF };
+unsigned long int code Digit[] = {0x0001};
 
 
 /*array to  on the Particular LED (Row 5, col 12) */

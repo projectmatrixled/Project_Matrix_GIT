@@ -32,7 +32,7 @@ Options 1,0,0  // Target 'Target 1'
  EnvLib ()
  EnvReg (ÿAtmel\)
  OrgReg (ÿAtmel\)
- TgStat=25
+ TgStat=24
  OutDir (.\)
  OutName (89S52_uv2_proj)
  GenApp=1

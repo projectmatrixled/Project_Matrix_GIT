@@ -1,6 +1,5 @@
 
 # include "..\config\led_display_config.h"
-#include "..\source\CHAR_ARRAY.c"
 
 #define  SHCP 	SHIFT_REG_SHIFTING_CLOCK
 #define  STCP 	SHIFT_REG_STORAGE_CLOCK
@@ -8,56 +7,63 @@
 
 #if (LED_DISPLAY_ENABLED == TRUE )
 
- void write_row(unsigned int row_number)
+
+ /*Funtion for the row number*/
+ void row_number(int row)
   {
-   int i,k,j;
+    int i;
+	if(row<=8)
+	     {
+			COUNTER1_RST = HIGH;	
+		    COUNTER1_RST = LOW;	
+			COUNTER1_CLK_ENABLE=LOW; 
+								
+		    for(i=0; i<row; i++)
+   			   {
+				COUNTER_CLK = LOW;
+				COUNTER_CLK = HIGH;	
+			//	delay_us(1);	
+			   }	
+			    COUNTER1_CLK_ENABLE=HIGH ;				 	  		  
+			//	delay_us(1);
+	      }
+	  else 
+	     {
+			COUNTER2_RST = HIGH;	
+		    COUNTER2_RST = LOW;	
+			COUNTER2_CLK_ENABLE=LOW; 
+								
+		    for(i=8; i<row; i++)
+   			   {
+				COUNTER_CLK = LOW;
+				COUNTER_CLK = HIGH;		
+			   }	
+			    COUNTER2_CLK_ENABLE=HIGH ;				 	  		  
+	      }
+  }	
+  
+  			 
+ /*Function for the column number*/
+void column_number(int value)
+ {
+ 
+   unsigned short Mask =0x01,Flag,l,temp;
 
-    for(k=0; k<1; k++)
-	  {	
-	    for(j=0; j<100; j++)
-		  { 
-		    COUNTER1_RST = LOW;
-			COUNTER2_RST = LOW;
-			COUNTER_CLK =HIGH;
-			COUNTER_CLK =LOW;
-				
-		    for(i=1; i<=row_number; i++)
-   			 {
-			    write_column( Digit[k*8+(i-1)]);
-				write_column(0x00);
-				COUNTER_CLK =HIGH;
-				COUNTER_CLK =LOW;
-			   	delay_us(10);	
-			 }				  
-			    COUNTER1_RST = HIGH;
-				COUNTER2_RST = HIGH; 
-				delay_us(5);
-  		   }
+   temp = 0x01 << (value-1);
 
-		 }
-    }
-
-
- void write_column(unsigned int column_number)
-  {
-   unsigned int Mask =0x0001,Flag,l; 
-
-   for (l=0; l<16; l++)
-	{
-     Flag = column_number & Mask; 
+   for (l=0; l<32 ; l++)
+	 {
+      Flag = temp & Mask;
+	  if(Flag==0){ DS = LOW;}
+      else { DS = HIGH;}
 	  
-     if(Flag==0) 
-		  SHIFT_REG_SERIAL_DATA = LOW;
-     else
-   	     SHIFT_REG_SERIAL_DATA = HIGH;
-
-         SHIFT_REG_SHIFTING_CLOCK = HIGH;
-         SHIFT_REG_SHIFTING_CLOCK = LOW;
-         Mask = Mask << 1;
-      }
-     SHIFT_REG_STORAGE_CLOCK = HIGH;
-     SHIFT_REG_STORAGE_CLOCK = LOW;
-   }	
+	  SHCP = HIGH;
+      SHCP = LOW;
+      Mask = Mask << 1 ;
+     }
+      STCP = HIGH;
+      STCP = LOW;
+ }		
 
 
 

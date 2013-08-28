@@ -1,9 +1,9 @@
 // 32x16 matrix LED display as 32 Columns and 16 Rows
-// This is  test program to know if all the [32 * 16 = 512 ] LEDs are glowing
+// This is the program for select the Row and column to turn on the particular LED
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-// Edited on : 16/08/2013
-// Developed by : Sivalingam / Kumaraguru
-// Reviwed by : Kumaraguru
+// Edited on : 26/08/2013
+// Developed by : Sivalingam 
+// Reviwed by : Senthilkumar
 //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^	
 
 
@@ -18,16 +18,21 @@ typedef enum
   DISPLAY_TEXT,
   GET_INPUT,
   END_APPLICATION
-}st;
+} st;
 
 
 st STATUS = INITIALISE;
 
 void main ()
 {
-//unsigned int row_number;
+ delay_us(1000);
+ 
+ row_number(1);	   // Enter the Row number from 1 to 16 which u want to Glow 
+ delay_us(1);
+
 while(1)
-  {	
+  { 
+ 
   switch(STATUS)
 	{
 	    case INITIALISE:
@@ -35,9 +40,10 @@ while(1)
 		                   STATUS = TEST_LED;
 						   break;
 		case TEST_LED:
-					 /* This is a test program which turns on all the LEDS in the display  */
-				{
-					write_row(8);
+					 /* his is the program for select the Row and column to turn on the particular LED  */
+				{				   
+				   column_number(16);	 // Enter the Column number from 1 to 16 which u want to Glow 
+				   delay_us(1);	
 				}	
 						STATUS = TEST_LED;
 						break;
@@ -57,7 +63,7 @@ while(1)
 
 	 	default :
 						break;
-	 }
+	 }	  
 	}
 }	   
 
